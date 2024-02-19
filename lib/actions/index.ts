@@ -7,8 +7,6 @@ import { scrapeAmazonProduct } from "../scraper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { User } from "@/types";
 import { generateEmailBody, sendEmail } from "../nodemailer";
-import { stringify } from "querystring";
-
 export async function scrapeAndStoreProduct(productUrl: string) {
   if(!productUrl) return;
 
@@ -43,9 +41,7 @@ export async function scrapeAndStoreProduct(productUrl: string) {
       product,
       { upsert: true, new: true }
     );
-
-    revalidatePath(`/products/${newProduct._id._id}`);
-    // console.log(newProduct._id._id)
+    return newProduct._id;
   } catch (error: any) {
     throw new Error(`Failed to create/update product: ${error.message}`)
   }
@@ -116,3 +112,4 @@ export async function addUserEmailToProduct(productId: string, userEmail: string
     console.log(error);
   }
 }
+
