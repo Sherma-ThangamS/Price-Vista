@@ -23,8 +23,18 @@ export async function GET(request: Request) {
       products.map(async (currentProduct) => {
         // Scrape product
         const scrapedProduct = await scrapeAmazonProduct(currentProduct.url);
+        if (!scrapedProduct) {
+          console.error('scrapedProduct is undefined or null');
+          return;
+        }
 
         if (!scrapedProduct) return;
+        if (!currentProduct || !currentProduct.priceHistory) {
+            console.error('currentProduct or currentProduct.priceHistory is undefined or null');
+            return;
+          }
+        console.log('currentProduct:', currentProduct);
+        console.log('scrapedProduct:', scrapedProduct);
 
         const updatedPriceHistory = [
           ...currentProduct.priceHistory,
