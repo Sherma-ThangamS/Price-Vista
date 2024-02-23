@@ -45,14 +45,17 @@ const Searchbar = () => {
       const product = await scrapeAndStoreProduct(searchPrompt);
       setSearchPrompt("");
       console.log(product);
-
-      router.push(`/products/${product}`);
+      setTimeout(()=>{
+        router.push(`/products/${product}`);
+      },1000)
+      
+      
     } catch (error) {
       console.log(error);
     } finally {
       setTimeout(() => {
-          router.push(`/products/${product}`);
-      }, 30000);
+        setIsLoading(false);
+      })
     }
   };
 
