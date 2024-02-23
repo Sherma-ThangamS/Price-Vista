@@ -60,8 +60,8 @@ const Home = async () => {
         <h2 className="section-text">Trending</h2>
 
         <div className="flex flex-wrap gap-x-8 gap-y-16 ">
-          {allProducts?.map((product) => (
-            <ProductCard key={product._id} product={product} />
+          allProducts?.map((product) => (
+            product.image?<ProductCard key={product._id as string} product={product as Product} />:""
           ))}
         </div>
       </section>
