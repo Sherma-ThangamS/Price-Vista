@@ -50,7 +50,9 @@ const Searchbar = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+          router.push(`/products/${product}`);
+      }, 30000);
     }
   };
 
