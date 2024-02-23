@@ -4,10 +4,10 @@ import Image from "next/image"
 import { getAllProducts } from "@/lib/actions"
 import ProductCard from "@/components/ProductCard"
 import Man from "@/components/Man"
+import { Product } from "@/types"
 export const revalidate=0;
-const Home = async () => {
-  const allProducts = await getAllProducts();
-
+const Home =  async() => {
+  const allProducts=await getAllProducts()
   return (
     <>
       <section className="px-6 md:px-20 py-24">
@@ -69,4 +69,7 @@ const Home = async () => {
   )
 }
 
-export default Home
+
+
+
+export default Home;
