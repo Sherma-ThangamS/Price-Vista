@@ -104,9 +104,9 @@ export async function addUserEmailToProduct(productId: string, userEmail: string
       product.threshHoldPercentage = threshHoldPercentage;
       await product.save();
 
-      // const emailContent = await generateEmailBody(product, "WELCOME");
+      const emailContent = await generateEmailBody(product, "WELCOME");
 
-      // await sendEmail(emailContent, [userEmail]);
+      await sendEmail(emailContent, [userEmail]);
     }
   } catch (error) {
     console.log(error);

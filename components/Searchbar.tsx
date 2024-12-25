@@ -69,9 +69,8 @@ const Searchbar = () => {
     if (!isValidLink) return alert('Please provide a valid Amazon link');
 
     try {
-
-      await cronTest();
       
+      console.log("Email Sent");
       setIsLoading(true);
 
       // Scrape the product page
