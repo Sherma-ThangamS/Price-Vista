@@ -70,7 +70,6 @@ const Searchbar = () => {
 
     try {
       
-      console.log("Email Sent");
       setIsLoading(true);
 
       // Scrape the product page
@@ -79,7 +78,7 @@ const Searchbar = () => {
       // console.log("Product : ",product);
       setTimeout(()=>{
         router.push(`/products/${product}`);
-      },10)
+      },100)
       
       
     } catch (error) {
