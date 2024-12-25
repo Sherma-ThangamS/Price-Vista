@@ -82,27 +82,35 @@ export async function generateEmailBody(
 
 const transporter = nodemailer.createTransport({
   pool: true,
-  host: 'smtp.office365.com',
-  service: 'hotmail',
+  host: 'smtp.gmail.com',
+  service: 'gmail',
   port: 587,
   secure: false,
   auth: {
-    user: 'shermathangam.s@outlook.com',
-    pass: 'Sherma@0301',
+    user: 'bug321123bug@gmail.com',
+    pass: 'ixon fvrs qlvw jgja',
   },
   maxConnections: 1
 })
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
   const mailOptions = {
-    from: 'shermathangam.s@outlook.com',
+    from: 'bug321123bug@gmail.com',
     to: sendTo,
     html: emailContent.body,
     subject: emailContent.subject,
   }
   console.log("Sending email to: ", sendTo);
+  await new Promise((resolve, reject) => {
   transporter.sendMail(mailOptions, (error: any, info: any) => {
-    if(error) return console.log(error);
-    console.log('Email sent: ', info);
+    if(error){
+      console.log(error);
+      reject(error);
+    }
+    else {
+      resolve(info);
+      console.log('Email sent: ', info);
+    }
+  })
   })
 }
