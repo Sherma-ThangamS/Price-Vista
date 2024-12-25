@@ -13,14 +13,16 @@ const Modal = ({ productId }: Props) => {
   let [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState('');
+  const [threshHoldPercentage, setThreshHoldPercentage] = useState(40);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await addUserEmailToProduct(productId, email);
+    await addUserEmailToProduct(productId, email, threshHoldPercentage);
 
     setIsSubmitting(false)
+    setThreshHoldPercentage(40)
     setEmail('')
     closeModal()
   }
@@ -116,6 +118,12 @@ const Modal = ({ productId }: Props) => {
                       placeholder="Enter your email address"
                       className='dialog-input'
                     />
+                  </div>
+                  <div className='options'>
+                    <label htmlFor="threshHoldPercentage:">Discount Rate </label>
+                    <p className='options-input_container w-1/2'>
+                    <input type="number" className='w-full border-none focus:outline-none' max={100} min={0}  placeholder='Default 40%' onChange={(e)=>setThreshHoldPercentage(e.target.valueAsNumber)} />
+                    </p>
                   </div>
 
                   <button type="submit"

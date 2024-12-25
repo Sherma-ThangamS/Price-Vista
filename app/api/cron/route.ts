@@ -18,7 +18,6 @@ export async function GET(request: Request) {
 
     if (!products) throw new Error("No product fetched");
 
-    // ======================== 1 SCRAPE LATEST PRODUCT DETAILS & UPDATE DB
     const updatedProducts = await Promise.all(
       products.map(async (currentProduct) => {
         // Scrape product
@@ -33,8 +32,8 @@ export async function GET(request: Request) {
             console.error('currentProduct or currentProduct.priceHistory is undefined or null');
             return;
           }
-        console.log('currentProduct:', currentProduct);
-        console.log('scrapedProduct:', scrapedProduct);
+        // console.log('currentProduct:', currentProduct);
+        // console.log('scrapedProduct:', scrapedProduct);
 
         const updatedPriceHistory = [
           ...currentProduct.priceHistory,
@@ -64,11 +63,12 @@ export async function GET(request: Request) {
           scrapedProduct,
           currentProduct
         );
-
+        // console.log('emailNotifType:', emailNotifType);
         if (emailNotifType && updatedProduct.users.length > 0) {
           const productInfo = {
             title: updatedProduct.title,
             url: updatedProduct.url,
+            THRESHOLD_PERCENTAGE: updatedProduct.THRESHOLD_PERCENTAGE,
           };
           // Construct emailContent
           const emailContent = await generateEmailBody(productInfo, emailNotifType);

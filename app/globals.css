@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-=======
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -142,7 +107,15 @@ body {
   }
 
   .dialog-btn {
-    @apply px-5 py-3 text-white text-base font-semibold border border-secondary bg-secondary rounded-lg mt-8;
+    @apply px-5 py-3 text-white text-base font-semibold border border-secondary bg-secondary rounded-lg mt-1;
+  }
+
+  .options{
+    @apply text-gray-500 text-base font-normal;
+  }
+
+  .options-input_container {
+    @apply px-2 py-1 flex items-center gap-1 border border-gray-300 rounded-[27px];
   }
 
   /* NAVBAR */
@@ -185,4 +158,3 @@ body {
     @apply bg-gray-900 border border-gray-900 rounded-lg shadow-xs px-5 py-3 text-white text-base font-semibold hover:opacity-90 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40;
   }
 }
->>>>>>> b81868ef97bb8205b492119927a7dd3d3f4e1f6a

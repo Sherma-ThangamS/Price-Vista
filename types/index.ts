@@ -24,6 +24,7 @@ export type Product = {
   reviewsCount: number;
   stars: number;
   isOutOfStock: Boolean;
+  threshHoldPercentage: number;
   users?: User[];
 };
 
@@ -41,4 +42,5 @@ export type EmailContent = {
 export type EmailProductInfo = {
   title: string;
   url: string;
+  THRESHOLD_PERCENTAGE : Number;
 };

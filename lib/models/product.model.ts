@@ -21,11 +21,11 @@ const productSchema = new mongoose.Schema({
   category: { type: String },
   reviewsCount: { type: Number },
   isOutOfStock: { type: Boolean, default: false },
+  threshHoldPercentage: { type: Number, default: 40 },
   users: [
     {email: { type: String, required: true}}
   ], default: [],
 }, { timestamps: true });
 
 const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
-
 export default Product;

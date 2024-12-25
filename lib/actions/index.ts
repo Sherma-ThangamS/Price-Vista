@@ -91,7 +91,7 @@ export async function getSimilarProducts(productId: string) {
   }
 }
 
-export async function addUserEmailToProduct(productId: string, userEmail: string) {
+export async function addUserEmailToProduct(productId: string, userEmail: string, threshHoldPercentage: number) {
   try {
     const product = await Product.findById(productId);
 
@@ -101,12 +101,12 @@ export async function addUserEmailToProduct(productId: string, userEmail: string
 
     if(!userExists) {
       product.users.push({ email: userEmail });
-
+      product.threshHoldPercentage = threshHoldPercentage;
       await product.save();
 
-      const emailContent = await generateEmailBody(product, "WELCOME");
+      // const emailContent = await generateEmailBody(product, "WELCOME");
 
-      await sendEmail(emailContent, [userEmail]);
+      // await sendEmail(emailContent, [userEmail]);
     }
   } catch (error) {
     console.log(error);

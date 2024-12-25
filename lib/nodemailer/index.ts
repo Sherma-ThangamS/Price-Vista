@@ -14,7 +14,7 @@ export async function generateEmailBody(
   product: EmailProductInfo,
   type: NotificationType
   ) {
-  const THRESHOLD_PERCENTAGE = 40;
+  const THRESHOLD_PERCENTAGE = product.THRESHOLD_PERCENTAGE;
   // Shorten the product title
   const shortenedTitle =
     product.title.length > 20
@@ -81,19 +81,21 @@ export async function generateEmailBody(
 }
 
 const transporter = nodemailer.createTransport({
-  pool: true,
-  service: 'hotmail',
-  port: 2525,
+  // pool: true,
+  // host: 'smtp.office365.com',
+  service: 'gmail',
+  // port: 587,
+  // secure: false,
   auth: {
-    user: 'shermathangam.s@outlook.com',
-    pass: 'Sherma@0301',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
-  maxConnections: 1
+  // maxConnections: 1
 })
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
   const mailOptions = {
-    from: 'shermathangam.s@outlook.com',
+    from: 'sshermathangam@gmail.com',
     to: sendTo,
     html: emailContent.body,
     subject: emailContent.subject,

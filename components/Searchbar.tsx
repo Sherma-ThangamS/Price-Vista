@@ -1,8 +1,11 @@
 "use client"
 
+import { GET } from '@/app/api/cron/route';
+import { EmailContent, EmailProductInfo, NotificationType } from '@/types';
 import { scrapeAndStoreProduct } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react'
+import { sendEmail } from '@/lib/nodemailer';
 
 const isValidAmazonProductURL = (url: string) => {
   try {
@@ -24,7 +27,34 @@ const isValidAmazonProductURL = (url: string) => {
   return false;
 }
 
+const cronTest = async () => {
+  try {
+    const response = await fetch('/api/cron', {
+      method: 'GET',
+    });
+    const data = await response.json();
+    // console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+const TestEmail = async () => {
+  try{
+    const produt : EmailProductInfo = {
+      title: "Test Product",
+      url: "https://www.amazon.com",
+      THRESHOLD_PERCENTAGE: 10
+    }
+    const emailContent : EmailContent = {
+      subject: "Test Email",
+      body: "This is a test email"
+    }
+    await sendEmail(emailContent,["sshermathangam@gmail.com"]);
 
+  }catch(error){
+    console.error(error);
+  }
+}
 const Searchbar = () => {
   const [searchPrompt, setSearchPrompt] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -39,15 +69,18 @@ const Searchbar = () => {
     if (!isValidLink) return alert('Please provide a valid Amazon link');
 
     try {
+
+      await cronTest();
+      
       setIsLoading(true);
 
       // Scrape the product page
       const product = await scrapeAndStoreProduct(searchPrompt);
       setSearchPrompt("");
-      console.log(product);
+      // console.log("Product : ",product);
       setTimeout(()=>{
         router.push(`/products/${product}`);
-      },1000)
+      },10)
       
       
     } catch (error) {
