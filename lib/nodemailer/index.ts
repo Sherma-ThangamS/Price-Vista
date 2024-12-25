@@ -81,16 +81,16 @@ export async function generateEmailBody(
 }
 
 const transporter = nodemailer.createTransport({
-  // pool: true,
-  // host: 'smtp.office365.com',
+  pool: true,
+  host: 'smtp.gmail.com',
   service: 'gmail',
-  // port: 587,
-  // secure: false,
+  port: 587,
+  secure: false,
   auth: {
     user: 'bug321123bug@gmail.com',
     pass: 'ixon fvrs qlvw jgja',
   },
-  // maxConnections: 1
+  maxConnections: 1
 })
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
