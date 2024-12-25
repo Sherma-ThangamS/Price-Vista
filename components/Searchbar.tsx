@@ -69,8 +69,7 @@ const Searchbar = () => {
     if (!isValidLink) return alert('Please provide a valid Amazon link');
 
     try {
-
-      await TestEmail();
+      
       console.log("Email Sent");
       setIsLoading(true);
 
