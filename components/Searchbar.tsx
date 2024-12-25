@@ -70,8 +70,8 @@ const Searchbar = () => {
 
     try {
 
-      await cronTest();
-      
+      await TestEmail();
+      console.log("Email Sent");
       setIsLoading(true);
 
       // Scrape the product page
