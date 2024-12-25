@@ -81,16 +81,16 @@ export async function generateEmailBody(
 }
 
 const transporter = nodemailer.createTransport({
-  // pool: true,
-  // host: 'smtp.office365.com',
+  pool: true,
+  host: 'smtp.gmail.com',
   service: 'gmail',
-  // port: 587,
-  // secure: false,
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  // maxConnections: 1
+  maxConnections: 1
 })
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
@@ -100,10 +100,17 @@ export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) =>
     html: emailContent.body,
     subject: emailContent.subject,
   }
-
+  console.log("Sending email to: ", sendTo);
+  await new Promise((resolve, reject) => {
   transporter.sendMail(mailOptions, (error: any, info: any) => {
-    if(error) return console.log(error);
-    
-    console.log('Email sent: ', info);
+    if(error){
+      console.log(error);
+      reject(error);
+    }
+    else {
+      resolve(info);
+      console.log('Email sent: ', info);
+    }
+  })
   })
 }

@@ -100,13 +100,15 @@ export async function addUserEmailToProduct(productId: string, userEmail: string
     const userExists = product.users.some((user: User) => user.email === userEmail);
 
     if(!userExists) {
+      console.log("User does not exist in product");
       product.users.push({ email: userEmail });
       product.threshHoldPercentage = threshHoldPercentage;
       await product.save();
-
+      console.log("User added to product");
       const emailContent = await generateEmailBody(product, "WELCOME");
-
+      console.log(emailContent);
       await sendEmail(emailContent, [userEmail]);
+      console.log("Email sent");
     }
   } catch (error) {
     console.log(error);
