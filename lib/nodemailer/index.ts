@@ -88,14 +88,14 @@ const transporter = nodemailer.createTransport({
   // secure: false,
   auth: {
     user: 'bug321123bug@gmail.com',
-    pass: "ixon fvrs qlvw jgja",
+    pass: 'ixon fvrs qlvw jgja',
   },
   // maxConnections: 1
 })
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
   const mailOptions = {
-    from: 'sshermathangam@gmail.com',
+    from: 'bug321123bug@gmail.com',
     to: sendTo,
     html: emailContent.body,
     subject: emailContent.subject,
