@@ -87,15 +87,15 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'bug321123bug@gmail.com',
-    pass: 'ixon fvrs qlvw jgja',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
   maxConnections: 1
 })
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
   const mailOptions = {
-    from: 'bug321123bug@gmail.com',
+    from: 'sshermathangam@gmail.com',
     to: sendTo,
     html: emailContent.body,
     subject: emailContent.subject,
