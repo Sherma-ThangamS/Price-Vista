@@ -1,7 +1,7 @@
 import Modal from "@/components/Modal";
 import PriceInfoCard from "@/components/PriceInfoCard";
 import ProductCard from "@/components/ProductCard";
-import { getProductById, getSimilarProducts } from "@/lib/actions"
+import { getProductById, getSimilarProducts } from "@/lib/actions";
 import { formatNumber } from "@/lib/utils";
 import { Product } from "@/types";
 import Image from "next/image";
@@ -48,7 +48,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
               </Link>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 cursor-pointer">
               <div className="product-hearts">
                 <Image 
                   src="/assets/icons/red-heart.svg"
